@@ -1,0 +1,44 @@
+<form>
+  <div class="form-group">
+    <h2>Invitations</h2>
+    <table mat-table [(ngModel)] ="studentInfo" class="table table-striped">
+      <tr>
+        <th  scope="col">Name</th>
+        <th  scope="col">Email</th>
+        <th  scope="col">Status</th>
+        
+      </tr>
+      <tr *ngFor="let student of studentInfo">
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ "Sent" }}</td>
+        
+        
+      </tr>
+    </table>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="add()">Send New Invitation</button>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+               <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+   
+    </div>
+    </div>
+    <!-- <div *ngIf="addApplicant">
+      <input type="text" (onKeyup) = "studentInfo.name" class="form-control">
+      <input type="text" (onKeyup)  = "studentInfo.name" class="form-control">
+    </div> -->
+</div>
+</form>
