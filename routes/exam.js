@@ -23,21 +23,37 @@ router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname,'../public/index.html'));
 });
 
+router.get('/admin', function(req, res) {
+  console.log('cookies>>> ', req.cookies.id_token);
+  res.sendFile(path.join(__dirname,'../public/index.html'));
+});
+
 router.get('/questions', (req, res) => {
   console.log('user>>> ', req.user);
   ExamService.getInvitationById(req.user.id)
     .then(invitation => {
-      res.json({
+      return res.json({
         name: invitation.name,
         email: invitation.email,
-        questions: invitation.questions,
+        questions: invitation.questions.map(
+          qn => ExamService.packageQuestion(qn)
+        ),
+        time_used: invitation.time_used,
+        time_away: invitation.time_away,
         duration: config.exam.duration
       })
     });
 });
 
-router.patch('/exam', (req, res) => {
-  ExamService.addProgress
+router.patch('/', (req, res) => {
+  ExamService.addProgress(req.user.id, req.body)
+    .then(info => {
+      console.log('info>>',info);
+      return res.status(201).json({status: 'success'});
+    })
+    .catch(err => {
+      return res.status(500).end({status: 'failed'});
+    });
 });
 
 module.exports = router;
