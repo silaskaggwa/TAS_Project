@@ -1,0 +1,59 @@
+<mat-card class="my-card">
+      <h2>Invitations</h2>
+      <!-- <mat-card-content>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let student"> {{student.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let student"> {{student.email}} </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let student"> {{student.status}} </td>
+          </ng-container>
+         
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content> -->
+      
+ <table mat-table>
+        <tr>
+          <th scope="col"> Name </th>
+          <th scope="col"> Email </th>
+          <th scope="col"> Status </th>
+        </tr>
+        <tr *ngFor="let student of dataSource">
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.status }}</td>
+        </tr>
+      </table>
+      <mat-card-actions>
+            <button mat-raised-button (click)="unhide()" color="primary">Send New Invitation</button><br/><br/>
+      </mat-card-actions>
+        
+      <mat-card-content>
+        <form #invitation="ngForm" class="my-form">
+          <div *ngIf="addApplicant">
+            <mat-form-field class="full-width">
+              <mat-label>Full Name</mat-label>
+              <input  name="newName" type="text" matInput  placeholder="Full Name"  [(ngModel)] = "newName"  class="form-control" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Email</mat-label>
+              <input  name="newEmail" type="email" matInput  placeholder="Email"  [(ngModel)] = "newEmail"  class="form-control" required>
+            </mat-form-field>
+            <mat-card-actions>
+              <button mat-raised-button [disabled]="invitation.form.invalid" (click)="send()" color="primary">Send</button>
+            </mat-card-actions>
+          </div>
+        </form> 
+      </mat-card-content>
+    <!-- </div> -->
+  <!-- </form> -->
+
+</mat-card>
