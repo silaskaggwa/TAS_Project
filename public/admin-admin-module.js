@@ -235,12 +235,13 @@ var QuestionService = /** @class */ (function () {
         this.domain = 'http://localhost:3000';
     }
     QuestionService.prototype.addQuestion = function (data) {
-        console.log('Question service has data-> :' + JSON.stringify(data));
+        //console.log('Question service has data-> :'+JSON.stringify(data));
         return this.http.post(this.domain + '/admin/questions/create', data); //, { withCredentials: true });
     };
     QuestionService.prototype.getQuestions = function () {
         //console.log('hi get question service');
-        return this.http.get(this.domain + '/admin/questions/all'); //, { withCredentials: true });
+        return this.http.get(this.domain + '/admin/questions'); //, { withCredentials: true });
+        //return this.http.get(this.domain+'/admin/questions/all');//, { withCredentials: true });
     };
     QuestionService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -293,11 +294,10 @@ var QuestionsComponent = /** @class */ (function () {
     function QuestionsComponent(questionService) {
         this.questionService = questionService;
         this.arr = [];
-        this.dataSource = [];
         this.displayedColumns = ['question', 'active'];
     }
     QuestionsComponent.prototype.ngOnInit = function () {
-        this.getAllQuestions();
+        this.getQuestions();
     };
     QuestionsComponent.prototype.addQuestion = function (form) {
         this.arr = form.value;
@@ -305,12 +305,13 @@ var QuestionsComponent = /** @class */ (function () {
         this.questionService.addQuestion(this.arr).subscribe(function (resp) { return console.log('resp>>', resp); });
         this.msg = '  Question is saved!';
     };
-    QuestionsComponent.prototype.getAllQuestions = function () {
+    QuestionsComponent.prototype.getQuestions = function () {
         var _this = this;
         this.questionService.getQuestions()
             .subscribe(function (data) {
+            console.log('questions', data);
             _this.dataSource = data;
-        });
+        }, function (err) { console.log('err', err.message); });
     };
     QuestionsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -654,47 +655,6 @@ var UserService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], UserService);
     return UserService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/material.module.ts":
-/*!************************************!*\
-  !*** ./src/app/material.module.ts ***!
-  \************************************/
-/*! exports provided: MyMaterialModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyMaterialModule", function() { return MyMaterialModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/datepicker */ "./node_modules/@angular/material/esm5/datepicker.es5.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-var MyMaterialModule = /** @class */ (function () {
-    function MyMaterialModule() {
-    }
-    MyMaterialModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatNativeDateModule"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_2__["MatDatepickerModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatIconModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatButtonModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCheckboxModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatToolbarModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCardModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatFormFieldModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatInputModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatListModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatRadioModule"],],
-            exports: [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatNativeDateModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_2__["MatDatepickerModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatGridListModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatIconModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSlideToggleModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatButtonModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCheckboxModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatToolbarModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCardModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatFormFieldModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatInputModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatListModule"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatRadioModule"],],
-        })
-    ], MyMaterialModule);
-    return MyMaterialModule;
 }());
 
 
